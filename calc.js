@@ -88,6 +88,9 @@ function avvisi(v) {
   if (['Focus Stacking', 'Focus Bracketing'].includes(v.computazionale) && v.af === 'C-AF') {
     msg.push('Focus Stacking/Bracketing: meglio S-AF o MF.');
   }
+  if (['Live ND', 'Live GND'].includes(v.computazionale) && !['S', 'M'].includes(v.modo)) {
+    msg.push('Live ND/GND funziona solo in modo S o M: cambia il modo esposizione.');
+  }
   if (v.computazionale === 'Live ND' && v.modo === 'M' && v.tempo) {
     msg.push('Live ND simula tempi lunghi: il tempo reale è gestito dalla fotocamera.');
   }

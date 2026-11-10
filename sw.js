@@ -1,6 +1,6 @@
 'use strict';
-const CACHE = 'om3-v1.0.0';
-const FILE = ['./', 'index.html', 'style.css', 'dati.js', 'util.js', 'calc.js', 'astro.js', 'legale.js', 'app.js',
+const CACHE = 'om3-v1.1.0';
+const FILE = ['./', 'index.html', 'style.css', 'dati.js', 'util.js', 'calc.js', 'astro.js', 'legale.js', 'guida.js', 'app.js',
   'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'];
 
 self.addEventListener('install', (e) => {

@@ -16,6 +16,19 @@ if (!Array.isArray(presets)) {
   presets = structuredClone(DATI.PRESET);
   LS.set('presets', presets);
 }
+// Migrazione 2: Live ND non funziona in A; Live Composite delle scie impostato come computazionale
+if (LS.get('dati', 1) < 2) {
+  for (const p of presets) {
+    const ref = DATI.PRESET.find((x) => x.nome === p.nome);
+    if (!ref) continue;
+    if (p.nome === 'Acqua setosa - Live ND' && p.modo === 'A') {
+      Object.assign(p, { modo: ref.modo, diaframma: ref.diaframma, tempo: ref.tempo, parametri_comp: ref.parametri_comp });
+    }
+    if (p.nome === 'Scie stellari - Live Composite' && p.computazionale === 'Nessuna') p.computazionale = ref.computazionale;
+  }
+  LS.set('presets', presets);
+  LS.set('dati', 2);
+}
 let miei = LS.get('miei', null);
 if (!Array.isArray(miei)) {
   miei = [...DATI.MIEI];
@@ -141,6 +154,15 @@ function dettaglio(id, box, m) {
   if (voci.length) {
     box.append(el('h3', {}, 'Checklist prima di scattare'),
       ...voci.map((v) => el('label', { class: 'interruttore' }, el('input', { type: 'checkbox' }), ' ' + v)));
+  }
+  const guide = istruzioni(p);
+  if (guide.length) {
+    box.append(el('h3', {}, 'Come attivarla'));
+    for (const [titolo, passi] of guide) {
+      box.append(el('details', {}, el('summary', {}, titolo),
+        el('ol', { class: 'legale' }, passi.map((s) => el('li', {}, s))),
+        el('p', { class: 'tenue piccolo' }, 'Indicazioni di massima: verifica i nomi dei menu sul manuale.')));
+    }
   }
   box.append(el('div', { class: 'riga azioni' },
     el('button', { class: 'btn', onclick: () => m.mostra((b) => modulo(id, b, m)) }, 'Modifica'),
