@@ -55,6 +55,19 @@ function piede() {
   );
 }
 
+function apriGuide() {
+  apriModale((box, m) => {
+    box.append(
+      el('div', { class: 'testata' }, el('h2', {}, 'Come attivare le modalità'),
+        el('button', { class: 'btn piatto', 'aria-label': 'Chiudi', onclick: () => m.chiudi() }, '✕')),
+      el('p', { class: 'tenue piccolo' }, 'Indicazioni di massima scritte a memoria: i nomi dei menu possono differire. Verifica sul manuale.')
+    );
+    for (const k of Object.keys(GUIDA)) {
+      box.append(el('details', {}, el('summary', {}, k), el('ol', { class: 'legale' }, GUIDA[k].map((s) => el('li', {}, s)))));
+    }
+  });
+}
+
 function apriInfo() {
   apriModale((box, m) => {
     box.append(
@@ -435,6 +448,7 @@ function vistaAltro(vista) {
     el('button', { class: 'btn contorno pieno', onclick: ripristinaEsempi }, 'Ripristina i preset di esempio mancanti'),
     el('button', { class: 'btn contorno pieno pericolo', onclick: () => conferma('Cancellare tutti i preset, le foto e le impostazioni di questo dispositivo?', 'Cancella tutto', cancellaTutto) }, 'Cancella tutti i dati'),
     el('hr'),
+    el('button', { class: 'btn contorno pieno', onclick: apriGuide }, 'Guida alle modalità computazionali'),
     el('button', { class: 'btn contorno pieno', onclick: apriInfo }, 'Note legali, crediti e licenza'),
     el('p', { class: 'tenue piccolo' }, `Versione ${VERSIONE_APP}`),
     piede()
