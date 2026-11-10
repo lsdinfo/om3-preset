@@ -69,6 +69,27 @@ const GUIDA = {
     'Metti la ghiera dei modi su B e scegli Live Time nelle impostazioni Bulb/Time/Composite.',
     'Premi per iniziare e premi di nuovo per terminare; vedi l\'anteprima durante l\'esposizione.',
   ],
+  'Meccanico': [
+    'Menu di scatto, sezione Silenzioso/Otturatore (o drive): scegli otturatore Meccanico.',
+    'È il modo standard: sincronizza con il flash e non ha distorsione da rolling shutter con soggetti veloci.',
+    'Fa rumore e vibra un po\': su treppiede con tempi lunghi valuta Elettronico anti-shock o ritardo otturatore.',
+  ],
+  'Elettronico (anti-shock)': [
+    'Nel menu di scatto/drive scegli Otturatore elettronico anti-shock (la 1ª tendina è elettronica, la 2ª meccanica).',
+    'Riduce le vibrazioni: utile su treppiede, macro e tempi medi-lunghi.',
+    'Evita di usarlo con luci artificiali pulsanti (strisce nelle foto).',
+  ],
+  'Elettronico silenzioso': [
+    'Nel menu drive/scatto scegli la modalità Silenziosa [♡] (otturatore completamente elettronico).',
+    'Nessun rumore e raffica più veloce (es. Pro Capture H), ma con soggetti veloci o luci LED/neon possono comparire distorsioni e strisce. Flash disattivato.',
+    'Ideale per eventi, concerti, animali e bambini; per interni e sport con luce LED considera Antiflicker o il meccanico.',
+  ],
+  'ISO Auto': [
+    'Menu di scatto, sezione ISO: imposta ISO su Auto, poi apri le impostazioni ISO-Auto (Set).',
+    'Scegli il limite massimo (Upper Limit) e l\'ISO di partenza (Default). L\'elenco dei valori dipende dal firmware: se non trovi 3200, scegli il valore più vicino disponibile (es. 6400).',
+    'In alternativa passa a M con ISO fisso (es. 3200), oppure in A/S usa la compensazione dell\'esposizione per controllare la luminosità.',
+    'Con il limite basso e poca luce la fotocamera allunga il tempo: tienilo d\'occhio per evitare mosso.',
+  ],
   'B (Bulb)': [
     'Metti la ghiera dei modi su B. L\'otturatore resta aperto finché tieni premuto il pulsante.',
   ],
@@ -78,5 +99,7 @@ function istruzioni(p) {
   const chiavi = [];
   if (p.computazionale && p.computazionale !== 'Nessuna') chiavi.push(p.computazionale);
   if (GUIDA[p.modo] && !chiavi.includes(p.modo)) chiavi.push(p.modo);
+  if (GUIDA[p.otturatore]) chiavi.push(p.otturatore);
+  if (/^auto/i.test((p.iso || '').trim())) chiavi.push('ISO Auto');
   return chiavi.filter((k) => GUIDA[k]).map((k) => [k, GUIDA[k]]);
 }

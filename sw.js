@@ -1,5 +1,5 @@
 'use strict';
-const CACHE = 'om3-v1.2.0';
+const CACHE = 'om3-v1.3.0';
 const FILE = ['./', 'index.html', 'style.css', 'dati.js', 'util.js', 'calc.js', 'astro.js', 'legale.js', 'guida.js', 'app.js',
   'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'];
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const VERSIONE_APP = '1.2.0';
+const VERSIONE_APP = '1.3.0';
 const VERSIONE_LEGALE = 1; // aumentala quando cambiano le note legali: l'avviso iniziale viene mostrato di nuovo
 
 const LEGALE = [
