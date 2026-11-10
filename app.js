@@ -533,7 +533,17 @@ function avvia() {
   $('#aggiungi').addEventListener('click', () => apriModale((box, m) => modulo(null, box, m)));
   mostra();
   avvisoIniziale();
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+  if ('serviceWorker' in navigator) {
+    const aveva = !!navigator.serviceWorker.controller;
+    let ricaricato = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (aveva && !ricaricato && !pila.length) {
+        ricaricato = true;
+        location.reload();
+      }
+    });
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).catch(() => {});
+  }
 }
 
 avvia();
